@@ -1,9 +1,9 @@
-import pyautogui
+import pyautogui # type: ignore
 import time
 import random
-import pyperclip
+import pyperclip # type: ignore
 import boton_detector as bd
-import cv2
+import cv2 # type: ignore
 
 class Mensaje:
     def __init__(self):

@@ -1,4 +1,4 @@
-from pynput.mouse import Listener
+from pynput.mouse import Listener # type: ignore
 
 class Calibracion:
     def __init__(self, config):

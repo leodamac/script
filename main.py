@@ -1,5 +1,5 @@
-import cv2
-import pyautogui
+import cv2 # type: ignore
+import pyautogui # type: ignore
 import numpy as np
 import json
 import mensaje as M

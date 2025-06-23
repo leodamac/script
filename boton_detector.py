@@ -1,7 +1,7 @@
 # boton_detector.py
-import cv2
+import cv2 # type: ignore
 import numpy as np
-import pyautogui
+import pyautogui # type: ignore
 
 class BotonDetector:
     def __init__(self, play_template_path, pause_template_path, stop_template_path):
