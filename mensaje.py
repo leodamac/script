@@ -47,9 +47,3 @@ class Mensaje:
         except Exception as e:
             print(f"Error al capturar la respuesta: {e}")
             return None
-men = Mensaje()
-i = 1
-while True:
-    men.enviar_mensaje("mensaje " + str(i))
-    men.leer_respuesta()
-    i+=1

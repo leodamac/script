@@ -10,23 +10,28 @@ class Detector:
         self.imagen_cv = None
         self.acciones = {}
         self.accion_actual = None
+        self.ventana_abierta = False
 
     def capturar_pantalla(self):
         imagen = pyautogui.screenshot()
         self.imagen_cv = cv2.cvtColor(np.array(imagen), cv2.COLOR_RGB2BGR)
 
     def mostrar_ventana(self):
+        self.ventana_abierta = True
         cv2.namedWindow('Imagen', cv2.WINDOW_NORMAL)
-        cv2.resizeWindow('Imagen', 800, 600)  
+        cv2.resizeWindow('Imagen', 800, 600)
         cv2.setMouseCallback('Imagen', self.detectar_click)
         cv2.imshow('Imagen', self.imagen_cv)
+        
 
     def detectar_click(self, event, x, y, flags, param):
         if event == cv2.EVENT_LBUTTONDOWN:
-            if self.programa_actual:
+            if self.accion_actual:
                 accion = input("Ingrese la acción para este click: ")
-                self.programas[self.programa_actual].append({"accion": accion, "x": x, "y": y})
+                self.acciones[self.accion_actual].append({"accion": accion, "x": x, "y": y})
                 print(f"Acción '{accion}' guardada para el click en ({x}, {y})")
+                if hasattr(self, 'ventana_abierta') and self.ventana_abierta:
+                    cv2.imshow('Imagen', self.imagen_cv)
 
     def crear_accion(self):
         nombre_accion = input("Ingrese el nombre de la accion: ")
@@ -40,9 +45,9 @@ class Detector:
             for accion in self.acciones[nombre_accion]:
                 pyautogui.moveTo(accion["x"], accion["y"])
                 pyautogui.click()
-                lista_p = ["p1.txt"]
+                lista_p = ["p1.txt", "p2.txt", "p3.txt"]
                 for p in lista_p:
-                     
+                     print(p)
                      with open(p, 'r', encoding='iso-8859-1') as p_file:
                         p_texto = p_file.read()
                         with open("transcripciones.json", 'r', encoding='iso-8859-1') as transcripciones_file:
@@ -57,7 +62,7 @@ class Detector:
                                         mensaje.enviar_mensaje(msg)
                                         
                                         mensaje.leer_respuesta()
-                        
+                     input(p + " presione ENTER para continuar ")
                     
         else:
             print("Accion no encontrada")
@@ -93,7 +98,7 @@ class Detector:
             elif opcion == "2":
                 self.ejecutar_accion()
             elif opcion == "3":
-                self.guardar_accioness()
+                self.guardar_acciones()
             elif opcion == "4":
                 break
             else:
