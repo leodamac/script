@@ -40,9 +40,9 @@ class Detector:
             for accion in self.acciones[nombre_accion]:
                 pyautogui.moveTo(accion["x"], accion["y"])
                 pyautogui.click()
-                lista_p = ["p1.txt"]
+                lista_p = ["p1.txt", "p2.txt", "p3.txt"]
                 for p in lista_p:
-                     
+                     input(p + " presione ENTER para continuar ")
                      with open(p, 'r', encoding='iso-8859-1') as p_file:
                         p_texto = p_file.read()
                         with open("transcripciones.json", 'r', encoding='iso-8859-1') as transcripciones_file:
